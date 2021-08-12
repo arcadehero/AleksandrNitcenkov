@@ -13,15 +13,40 @@
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+    <testng.configs.path>${project.build.testOutputDirectory}/testng</testng.configs.path>
+    <testng.suite.file>${testng.configs.path}/add-and-sub.xml</testng.suite.file>
+
+
     <testng.version>7.4.0</testng.version>
     <assertj-core.version>3.20.2</assertj-core.version>
     <checkstyle.version>8.42</checkstyle.version>
-
     <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+
   </properties>
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>2.5.2</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <groupId>com.calculator</groupId>
+              <artifactId>calculator-app</artifactId>
+              <version>1.0</version>
+              <packaging>jar</packaging>
+              <file>src/main/lib/calculator-1.0.jar</file>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -35,7 +60,6 @@
         </dependencies>
         <configuration>
           <configLocation>
-            <!--  pay attention to use exact url for checkstyle plugin ruleset  -->
             https://raw.githubusercontent.com/DmitryKhodakovsky/epam-training-center-code-checkers-configurations/main/checkstyle/checkstyle.xml
           </configLocation>
           <encoding>${project.build.sourceEncoding}</encoding>
@@ -54,33 +78,14 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-install-plugin</artifactId>
-        <version>3.0.0-M1</version>
-        <executions>
-          <execution>
-            <phase>initialize</phase>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-            <configuration>
-              <groupId>com.epam.tc</groupId>
-              <artifactId>calculator-1.0</artifactId>
-              <version>1.0</version>
-              <packaging>jar</packaging>
-              <file>src/main/resources/calculator-1.0.jar</file>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>${project.build.testOutputDirectory}/testng/homework1.xml</suiteXmlFile>
+            <suiteXmlFile>${testng.suite.file}</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
       </plugin>
@@ -94,55 +99,25 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M5</version>
-            <configuration>
-              <suiteXmlFiles>
-                <suiteXmlFile>add-and-sub.xml</suiteXmlFile>
-              </suiteXmlFiles>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/add-and-sub.xml</testng.suite.file>
+      </properties>
     </profile>
+
     <profile>
       <id>multi-div-profile</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M5</version>
-            <configuration>
-              <suiteXmlFiles>
-                <suiteXmlFile>mult-and-div-tests.xml</suiteXmlFile>
-              </suiteXmlFiles>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/mult-and-div-tests.xml</testng.suite.file>
+      </properties>
     </profile>
+
     <profile>
       <id>all-tests-profile</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M5</version>
-            <configuration>
-              <suiteXmlFiles>
-                <suiteXmlFile>all-tests.xml</suiteXmlFile>
-              </suiteXmlFiles>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/all-tests.xml</testng.suite.file>
+      </properties>
     </profile>
+
   </profiles>
 
   <dependencies>
@@ -152,13 +127,19 @@
       <version>${testng.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>${assertj-core.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.calculator</groupId>
+      <artifactId>calculator-app</artifactId>
+      <version>1.0</version>
+    </dependency>
+
   </dependencies>
-
-
 </project>
