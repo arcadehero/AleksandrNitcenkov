@@ -15,13 +15,15 @@
 
     <testng.configs.path>${project.build.testOutputDirectory}/testng</testng.configs.path>
     <testng.suite.file>${testng.configs.path}/add-and-sub.xml</testng.suite.file>
-
+    <testng.suite.file>${testng.configs.path}/jdi-testing.xml</testng.suite.file>
 
     <testng.version>7.4.0</testng.version>
     <assertj-core.version>3.20.2</assertj-core.version>
     <checkstyle.version>8.42</checkstyle.version>
     <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+    <selenium-java.version>3.141.59</selenium-java.version>
+    <webdrivermanager.version>4.4.3</webdrivermanager.version>
 
   </properties>
 
@@ -118,6 +120,13 @@
       </properties>
     </profile>
 
+    <profile>
+      <id>jdi-testing-profile</id>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/jdi-testing.xml</testng.suite.file>
+      </properties>
+    </profile>
+
   </profiles>
 
   <dependencies>
@@ -139,6 +148,18 @@
       <groupId>com.calculator</groupId>
       <artifactId>calculator-app</artifactId>
       <version>1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>${selenium-java.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>${webdrivermanager.version}</version>
     </dependency>
 
   </dependencies>
