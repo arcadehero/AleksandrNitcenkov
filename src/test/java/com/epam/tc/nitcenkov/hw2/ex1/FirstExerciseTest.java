@@ -1,7 +1,9 @@
 package com.epam.tc.nitcenkov.hw2.ex1;
 
 import com.epam.tc.nitcenkov.hw2.GeneralExerciseTest;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,18 +21,13 @@ public class FirstExerciseTest extends GeneralExerciseTest {
         softAssertions.assertThat(webDriver.getTitle()).isEqualTo("Home Page");
 
         //Perform login
-
         webDriverWait.until(ExpectedConditions.elementToBeClickable(
             webDriver.findElement(By.id("user-icon")))).click();
-
         webDriver.switchTo().activeElement();
-
         webDriverWait.until(ExpectedConditions
             .visibilityOf(webDriver.findElement(By.id("name")))).sendKeys("Roman");
-
         webDriverWait.until(ExpectedConditions
             .visibilityOf(webDriver.findElement(By.id("password")))).sendKeys("Jdi1234");
-
         webDriverWait.until(ExpectedConditions
             .visibilityOf(webDriver.findElement(By.id("login-button")))).click();
 
@@ -40,28 +37,28 @@ public class FirstExerciseTest extends GeneralExerciseTest {
         softAssertions.assertThat(actualUserName).isEqualTo("ROMAN IOVLEV");
 
         //Assert that there are 4 items on the header section are displayed and they have proper texts
-        webDriverWait.until(ExpectedConditions
-            .visibilityOfAllElements(
-                webDriver.findElements(By.xpath("//*[@class='uui-navigation nav navbar-nav m-l8']"))));
-        List<WebElement> menuButtons =
-            webDriver.findElements(By.xpath("//*[@class='uui-navigation nav navbar-nav m-l8'][1]/li"));
+        List<String> expectedMenuButtons = Arrays.asList("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS");
+        List<WebElement> menuButtons = webDriverWait.until(ExpectedConditions.visibilityOfAllElements(
+            webDriver.findElements(By.cssSelector("ul.nav > li"))));
         softAssertions.assertThat(menuButtons.size()).isEqualTo(4);
-        softAssertions.assertThat(menuButtons.get(0).getText()).isEqualTo("HOME");
-        softAssertions.assertThat(menuButtons.get(1).getText()).isEqualTo("CONTACT FORM");
-        softAssertions.assertThat(menuButtons.get(2).getText()).isEqualTo("SERVICE");
-        softAssertions.assertThat(menuButtons.get(3).getText()).isEqualTo("METALS & COLORS");
+        for (WebElement element : menuButtons
+        ) {
+            softAssertions.assertThat(element.isDisplayed());
+        }
+        List<String> actualMenuButtons = menuButtons
+            .stream()
+            .map(WebElement::getText)
+            .collect(Collectors.toList());
+        softAssertions.assertThat(actualMenuButtons).isEqualTo(expectedMenuButtons);
 
         //Assert that there are 4 images on the Index Page and they are displayed
-        webDriverWait.until(
-            ExpectedConditions
-                .visibilityOfAllElements(webDriver.findElements(By.xpath("//*[@class='benefit-icon']"))));
-        List<WebElement> images = webDriver.findElements(By.xpath("//*[@class='benefit-icon']"));
+        List<WebElement> images = webDriverWait.until(ExpectedConditions
+            .visibilityOfAllElements(webDriver.findElements(By.className("benefit-icon"))));
         softAssertions.assertThat(images.size()).isEqualTo(4);
 
         //Assert that there are 4 texts on the Index Page under icons and they have proper text
-        webDriverWait.until(ExpectedConditions
-            .visibilityOfAllElements(webDriver.findElements(By.xpath("//span[@class='benefit-txt']"))));
-        List<WebElement> benefitTexts = webDriver.findElements(By.xpath("//span[@class='benefit-txt']"));
+        List<WebElement> benefitTexts = webDriverWait.until(ExpectedConditions
+            .visibilityOfAllElements(webDriver.findElements(By.className("benefit-txt"))));
         softAssertions.assertThat(benefitTexts.get(0).getText())
                       .isEqualTo(
                           "To include good practices" + "\n" + "and ideas from successful" + "\n" + "EPAM project");
@@ -80,7 +77,7 @@ public class FirstExerciseTest extends GeneralExerciseTest {
         //Switch to the iframe and check that there is “Frame Button” in the iframe
         WebElement iframe = webDriver.findElement(By.tagName("iframe"));
         webDriver.switchTo().frame(iframe);
-        softAssertions.assertThat(webDriver.findElement(By.xpath("//*[@class='btn btn-info']")).isDisplayed())
+        softAssertions.assertThat(webDriver.findElement(By.id("frame-button")).isDisplayed())
                       .isTrue();
 
         //Switch to original window back
@@ -88,12 +85,16 @@ public class FirstExerciseTest extends GeneralExerciseTest {
 
         //Assert that there are 5 items in the Left Section are displayed and they have proper text
         List<WebElement> sideBarElements = webDriverWait.until(ExpectedConditions
-            .visibilityOfAllElements(webDriver.findElements(By.xpath("//*[@class='sidebar-menu left']/li/a"))));
-        softAssertions.assertThat(sideBarElements.get(0).getText()).isEqualTo("Home");
-        softAssertions.assertThat(sideBarElements.get(1).getText()).isEqualTo("Contact form");
-        softAssertions.assertThat(sideBarElements.get(2).getText()).isEqualTo("Service");
-        softAssertions.assertThat(sideBarElements.get(3).getText()).isEqualTo("Metals & Colors");
-        softAssertions.assertThat(sideBarElements.get(4).getText()).isEqualTo("Elements packs");
+            .visibilityOfAllElements(webDriver.findElements(By.cssSelector("ul.sidebar-menu > li"))));
+
+        List<String> expectedSideBarElements =
+            Arrays.asList("Home", "Contact form", "Service", "Metals & Colors", "Elements packs");
+
+        List<String> actualSideBarElements = sideBarElements
+            .stream()
+            .map(WebElement::getText)
+            .collect(Collectors.toList());
+        softAssertions.assertThat(actualSideBarElements).isEqualTo(expectedSideBarElements);
 
         //Close Browser - Already implemented in GeneralExerciseTest as tearDownDriver().
         softAssertions.assertAll();

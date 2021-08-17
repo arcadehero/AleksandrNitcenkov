@@ -10,9 +10,9 @@ import org.testng.annotations.BeforeMethod;
 
 public class GeneralExerciseTest {
 
-    public WebDriver webDriver;
-    public WebDriverWait webDriverWait;
-    public SoftAssertions softAssertions;
+    protected WebDriver webDriver;
+    protected WebDriverWait webDriverWait;
+    protected SoftAssertions softAssertions;
 
     @BeforeMethod(alwaysRun = true)
     public void setUpDriver() {
@@ -25,6 +25,6 @@ public class GeneralExerciseTest {
 
     @AfterMethod(alwaysRun = true)
     public void tearDownDriver() {
-        webDriver.close();
+        webDriver.quit();
     }
 }
