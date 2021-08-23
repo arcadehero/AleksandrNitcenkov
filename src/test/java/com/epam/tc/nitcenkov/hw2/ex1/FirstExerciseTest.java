@@ -43,7 +43,7 @@ public class FirstExerciseTest extends GeneralExerciseTest {
         softAssertions.assertThat(menuButtons.size()).isEqualTo(4);
         for (WebElement element : menuButtons
         ) {
-            softAssertions.assertThat(element.isDisplayed());
+            softAssertions.assertThat(element.isDisplayed()).isTrue();
         }
         List<String> actualMenuButtons = menuButtons
             .stream()
@@ -59,17 +59,13 @@ public class FirstExerciseTest extends GeneralExerciseTest {
         //Assert that there are 4 texts on the Index Page under icons and they have proper text
         List<WebElement> benefitTexts = webDriverWait.until(ExpectedConditions
             .visibilityOfAllElements(webDriver.findElements(By.className("benefit-txt"))));
-        softAssertions.assertThat(benefitTexts.get(0).getText())
-                      .isEqualTo(
-                          "To include good practices" + "\n" + "and ideas from successful" + "\n" + "EPAM project");
-        softAssertions.assertThat(benefitTexts.get(1).getText())
-                      .isEqualTo("To be flexible and" + "\n" + "customizable");
-
-        softAssertions.assertThat(benefitTexts.get(2).getText()).isEqualTo("To be multiplatform");
-        softAssertions.assertThat(benefitTexts.get(3).getText())
-                      .isEqualTo(
-                          "Already have good base" + "\n" + "(about 20 internal and" + "\n" + "some external projects),"
-                              + "\n" + "wish to get more…");
+        List<String> actualBenefitTexts = benefitTexts.stream().map(WebElement::getText).collect(Collectors.toList());
+        List<String> expectedIndexPageTexts =
+            Arrays.asList("To include good practices" + "\n" + "and ideas from successful" + "\n" + "EPAM project",
+                "To be flexible and" + "\n" + "customizable", "To be multiplatform",
+                "Already have good base" + "\n" + "(about 20 internal and" + "\n" + "some external projects),"
+                    + "\n" + "wish to get more…");
+        softAssertions.assertThat(actualBenefitTexts).isEqualTo(expectedIndexPageTexts);
 
         //Assert that there is the iframe with “Frame Button” exist
         softAssertions.assertThat(webDriver.findElement(By.tagName("iframe")).isDisplayed()).isTrue();

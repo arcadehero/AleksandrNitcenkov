@@ -33,8 +33,7 @@ public class SecondExerciseTest extends GeneralExerciseTest {
 
         //Open through the header menu Service -> Different Elements Page
         webDriverWait.until(ExpectedConditions.visibilityOf(webDriver
-            .findElement(By.cssSelector(".dropdown-toggle"))))
-                     .click();
+            .findElement(By.cssSelector(".dropdown-toggle")))).click();
         webDriverWait.until(ExpectedConditions
             .visibilityOf(webDriver.findElement(By.cssSelector("li:nth-child(8) > a")))).click();
 
@@ -62,8 +61,7 @@ public class SecondExerciseTest extends GeneralExerciseTest {
         List<String> actualElements = elements
             .stream()
             .map(WebElement::getText)
-            .map(s -> s.replaceAll("\\d", ""))
-            .map(e -> e.replaceAll(":", "").trim())
+            .map(s -> s.replaceAll("\\d", "").replaceAll(":", "").trim())
             .collect(Collectors.toList());
 
         List<String> expectedElements = Arrays
