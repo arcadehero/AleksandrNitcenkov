@@ -4,6 +4,7 @@ import com.epam.tc.nitcenkov.hw2.GeneralExerciseTest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +14,8 @@ public class FirstExerciseTest extends GeneralExerciseTest {
 
     @Test
     public void firstExerciseTest() {
+
+        SoftAssertions softAssertions = new SoftAssertions();
 
         //Open test site by URL
         webDriver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
@@ -41,10 +44,8 @@ public class FirstExerciseTest extends GeneralExerciseTest {
         List<WebElement> menuButtons = webDriverWait.until(ExpectedConditions.visibilityOfAllElements(
             webDriver.findElements(By.cssSelector("ul.nav > li"))));
         softAssertions.assertThat(menuButtons.size()).isEqualTo(4);
-        for (WebElement element : menuButtons
-        ) {
-            softAssertions.assertThat(element.isDisplayed()).isTrue();
-        }
+        softAssertions.assertThat(menuButtons.stream().allMatch(WebElement::isDisplayed)).isTrue();
+
         List<String> actualMenuButtons = menuButtons
             .stream()
             .map(WebElement::getText)
@@ -68,13 +69,13 @@ public class FirstExerciseTest extends GeneralExerciseTest {
         softAssertions.assertThat(actualBenefitTexts).isEqualTo(expectedIndexPageTexts);
 
         //Assert that there is the iframe with “Frame Button” exist
-        softAssertions.assertThat(webDriver.findElement(By.tagName("iframe")).isDisplayed()).isTrue();
+
+        WebElement iframe = webDriver.findElement(By.id("frame"));
+        softAssertions.assertThat(iframe.isDisplayed()).isTrue();
 
         //Switch to the iframe and check that there is “Frame Button” in the iframe
-        WebElement iframe = webDriver.findElement(By.tagName("iframe"));
         webDriver.switchTo().frame(iframe);
-        softAssertions.assertThat(webDriver.findElement(By.id("frame-button")).isDisplayed())
-                      .isTrue();
+        softAssertions.assertThat(webDriver.findElement(By.id("frame-button")).isDisplayed()).isTrue();
 
         //Switch to original window back
         webDriver.switchTo().defaultContent();

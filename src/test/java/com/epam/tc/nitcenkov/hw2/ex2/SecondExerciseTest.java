@@ -4,6 +4,7 @@ import com.epam.tc.nitcenkov.hw2.GeneralExerciseTest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +14,8 @@ public class SecondExerciseTest extends GeneralExerciseTest {
 
     @Test
     public void secondExerciseTest() {
+
+        SoftAssertions softAssertions = new SoftAssertions();
 
         //Open test site by URL
         webDriver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
