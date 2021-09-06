@@ -1,4 +1,4 @@
-package com.epam.tc.nitcenkov.hw3.pages.components;
+package com.epam.tc.nitcenkov.hw3.components;
 
 import com.epam.tc.nitcenkov.hw3.pages.BasePage;
 import java.util.List;
@@ -39,13 +39,11 @@ public class HeaderComponent extends BasePage {
     }
 
     public boolean isHeaderElementsVisible() {
-        for (WebElement element : headerMenuButtons
-        ) {
-            if (element.isDisplayed()) {
-                return true;
-            }
-        }
-        return false;
+        return headerMenuButtons.stream().allMatch(WebElement::isDisplayed);
+    }
+
+    public List<WebElement> getHeaderMenuButtons() {
+        return headerMenuButtons;
     }
 
     public List<String> getHeaderElementsText() {

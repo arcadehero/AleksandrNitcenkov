@@ -1,4 +1,4 @@
-package com.epam.tc.nitcenkov.hw3.pages.components;
+package com.epam.tc.nitcenkov.hw3.components;
 
 import com.epam.tc.nitcenkov.hw3.pages.BasePage;
 import java.util.List;
@@ -13,13 +13,7 @@ public class LeftSectionComponent extends BasePage {
     List<WebElement> sideBarElements;
 
     public boolean isLeftSectionElementsDisplayed() {
-        for (WebElement element : sideBarElements
-        ) {
-            if (element.isDisplayed()) {
-                return true;
-            }
-        }
-        return false;
+        return sideBarElements.stream().allMatch(WebElement::isDisplayed);
     }
 
     public List<String> getLeftSectionElements() {

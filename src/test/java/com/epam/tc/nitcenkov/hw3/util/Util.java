@@ -6,11 +6,12 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public final class Util {
-    private static final Properties PROPERTIES = new Properties();
 
     public static String URL;
     public static String LOGIN;
     public static String PASSWORD;
+    public static String USER_NAME;
+    public static String TITLE;
 
     static {
         loadProperties();
@@ -23,6 +24,8 @@ public final class Util {
             URL = prop.getProperty("url");
             LOGIN = prop.getProperty("login");
             PASSWORD = prop.getProperty("password");
+            USER_NAME = prop.getProperty("user-name");
+            TITLE = prop.getProperty("title");
         } catch (IOException e) {
             e.printStackTrace();
         }

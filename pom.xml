@@ -25,6 +25,7 @@
     <selenium-java.version>3.141.59</selenium-java.version>
     <webdrivermanager.version>4.4.3</webdrivermanager.version>
 
+    <selenium.version>3.141.59</selenium.version>
   </properties>
 
   <build>
@@ -147,6 +148,7 @@
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>${assertj-core.version}</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
@@ -172,14 +174,14 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-api</artifactId>
-      <version>3.141.59</version>
+      <version>${selenium.version}</version>
       <scope>compile</scope>
     </dependency>
 
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-support</artifactId>
-      <version>3.141.59</version>
+      <version>${selenium.version}</version>
       <scope>compile</scope>
     </dependency>
 

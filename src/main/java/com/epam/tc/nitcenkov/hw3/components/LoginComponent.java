@@ -1,4 +1,4 @@
-package com.epam.tc.nitcenkov.hw3.pages.components;
+package com.epam.tc.nitcenkov.hw3.components;
 
 import com.epam.tc.nitcenkov.hw3.pages.BasePage;
 import org.openqa.selenium.WebDriver;
