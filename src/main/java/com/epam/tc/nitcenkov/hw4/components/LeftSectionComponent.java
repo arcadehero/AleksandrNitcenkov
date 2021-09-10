@@ -15,13 +15,7 @@ public class LeftSectionComponent extends BasePage {
 
     @Step("Check if left section elements are displayed")
     public boolean isLeftSectionElementsDisplayed() {
-        for (WebElement element : sideBarElements
-        ) {
-            if (element.isDisplayed()) {
-                return true;
-            }
-        }
-        return false;
+        return sideBarElements.stream().allMatch(WebElement::isDisplayed);
     }
 
     public List<String> getLeftSectionElements() {

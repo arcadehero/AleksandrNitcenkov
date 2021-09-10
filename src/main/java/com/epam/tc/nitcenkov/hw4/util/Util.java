@@ -12,6 +12,9 @@ public final class Util {
     public static String LOGIN;
     public static String INVALID_LOGIN;
     public static String PASSWORD;
+    public static String TITLE;
+    public static String USER_NAME;
+
 
     static {
         loadProperties();
@@ -25,6 +28,8 @@ public final class Util {
             LOGIN = prop.getProperty("login");
             INVALID_LOGIN = prop.getProperty("invalidLogin");
             PASSWORD = prop.getProperty("password");
+            TITLE = prop.getProperty("title");
+            USER_NAME = prop.getProperty("user-name");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -42,13 +42,11 @@ public class HeaderComponent extends BasePage {
 
     @Step("Check if header elements are visible")
     public boolean isHeaderElementsVisible() {
-        for (WebElement element : headerMenuButtons
-        ) {
-            if (element.isDisplayed()) {
-                return true;
-            }
-        }
-        return false;
+        return headerMenuButtons.stream().allMatch(WebElement::isDisplayed);
+    }
+
+    public List<WebElement> getHeaderMenuButtons() {
+        return headerMenuButtons;
     }
 
     public List<String> getHeaderElementsText() {

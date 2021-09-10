@@ -1,5 +1,9 @@
 package com.epam.tc.nitcenkov.hw4.pages;
 
+import com.epam.tc.nitcenkov.hw4.components.BenefitsComponent;
+import com.epam.tc.nitcenkov.hw4.components.HeaderComponent;
+import com.epam.tc.nitcenkov.hw4.components.LeftSectionComponent;
+import com.epam.tc.nitcenkov.hw4.components.LoginComponent;
 import io.qameta.allure.Step;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,10 +14,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class IndexPage extends BasePage {
-
-    SoftAssertions softAssertions = new SoftAssertions();
-    private static final int EXPECTED_IMAGES_NUMBER = 4;
-    private static final int EXPECTED_TEXTS_NUMBER = 4;
 
     @FindBy(className = "benefit-icon")
     List<WebElement> benefitIcon;
@@ -30,30 +30,26 @@ public class IndexPage extends BasePage {
     public IndexPage(WebDriver webdriver1) {
         super(webdriver1);
         PageFactory.initElements(webdriver1, this);
+        headerComponent = new HeaderComponent(webdriver1);
+        benefitsComponent = new BenefitsComponent(webdriver1);
+        loginComponent = new LoginComponent(webdriver1);
+        leftSectionComponent = new LeftSectionComponent(webdriver1);
     }
 
-    @Step("Check if index page images are displayed")
-    public boolean isIndexPageImagesDisplayed() {
-        softAssertions.assertThat(benefitIcon.size()).isEqualTo(EXPECTED_IMAGES_NUMBER);
-        for (WebElement element : benefitIcon
-        ) {
-            if (element.isDisplayed()) {
-                return true;
-            }
-        }
-        return false;
+    public HeaderComponent getHeaderComponent() {
+        return headerComponent;
     }
 
-    @Step("Check if index page texts are displayed")
-    public boolean isIndexPageTextsDisplayed() {
-        softAssertions.assertThat(benefitIcon.size()).isEqualTo(EXPECTED_TEXTS_NUMBER);
-        for (WebElement element : benefitText
-        ) {
-            if (element.isDisplayed()) {
-                return true;
-            }
-        }
-        return false;
+    public LeftSectionComponent getLeftSectionComponent() {
+        return leftSectionComponent;
+    }
+
+    public BenefitsComponent getBenefitsComponent() {
+        return benefitsComponent;
+    }
+
+    public LoginComponent getLoginComponent() {
+        return loginComponent;
     }
 
     @Step
