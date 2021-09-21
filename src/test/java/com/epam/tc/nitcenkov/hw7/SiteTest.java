@@ -5,6 +5,7 @@ import static com.epam.tc.nitcenkov.hw7.Site.login;
 import static com.epam.tc.nitcenkov.hw7.Site.metalsAndColorsPage;
 import static com.epam.tc.nitcenkov.hw7.Site.openHomePage;
 import static com.epam.tc.nitcenkov.hw7.Site.openMetalsAndColorsPage;
+import static com.epam.tc.nitcenkov.hw7.entities.MetalAndColors.getExpectedResult;
 import static com.epam.tc.nitcenkov.hw7.entities.User.ROMAN;
 import static org.testng.Assert.assertEquals;
 
@@ -24,10 +25,9 @@ public class SiteTest implements TestInit {
         openMetalsAndColorsPage();
         metalsAndColorsPage.checkOpened();
 
-        MetalsAndColorsPage.metalsAndColorsForm.fill(metalAndColors);
-        MetalsAndColorsPage.metalsAndColorsForm.submit();
+        MetalsAndColorsPage.metalsAndColorsForm.submit(metalAndColors);
 
-        assertEquals(MetalsAndColorsPage.getActualResult(), MetalsAndColorsPage.getExpectedResult(metalAndColors));
+        assertEquals(MetalsAndColorsPage.getActualResult(), getExpectedResult(metalAndColors));
 
         Site.logout();
     }

@@ -192,6 +192,7 @@
     </dependency>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-api</artifactId>
@@ -210,5 +211,7 @@
 
 
 >>>>>>> c69986d (homework7 is ready for review)
+=======
+>>>>>>> 8029252 (homework7 fixed, ready for second review)
   </dependencies>
 </project>
