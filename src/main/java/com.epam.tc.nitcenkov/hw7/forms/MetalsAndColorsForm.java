@@ -4,16 +4,11 @@ import com.epam.jdi.light.elements.complex.Checklist;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Checkbox;
-import com.epam.jdi.light.ui.html.elements.common.Icon;
-import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import com.epam.tc.nitcenkov.hw7.entities.MetalAndColors;
-import com.epam.tc.nitcenkov.hw7.util.DataParser;
 
 public class MetalsAndColorsForm extends Form<MetalAndColors> {
 
@@ -50,9 +45,7 @@ public class MetalsAndColorsForm extends Form<MetalAndColors> {
     @FindBy(css = "#submit-button")
     public Button submit;
 
-
-
-    public void fill(MetalAndColors metalAndColors) {
+    public void submit(MetalAndColors metalAndColors) {
         oddButton.select(metalAndColors.getSummary().get(0).toString());
         evenButton.select(metalAndColors.getSummary().get(1).toString());
         calculateButton.click();
@@ -65,10 +58,6 @@ public class MetalsAndColorsForm extends Form<MetalAndColors> {
         for (String vegetable : metalAndColors.getVegetables()) {
             vegetablesDropDown.select(vegetable);
         }
-    }
-
-    public void submit() {
         submit.click();
     }
-
 }

@@ -1,5 +1,8 @@
 package com.epam.tc.nitcenkov.hw7.entities;
 
+import static java.lang.String.join;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MetalAndColors {
@@ -42,11 +45,6 @@ public class MetalAndColors {
         return vegetables;
     }
 
-    public void setElements(List<String> elements) {
-        this.elements = elements;
-    }
-
-
     @Override
     public String toString() {
         return "MetalAndColors{"
@@ -56,5 +54,17 @@ public class MetalAndColors {
             + ", metals='" + metals + '\''
             + ", vegetables=" + vegetables
             + '}';
+    }
+
+    public static List<String> getExpectedResult(MetalAndColors input) {
+        return new ArrayList<>() {
+            {
+                add(String.format("Summary: %d", input.getSummary().get(0) + input.getSummary().get(1)));
+                add(String.format("Elements: %s", join(", ", input.getElements())));
+                add(String.format("Color: %s", input.getColor()));
+                add(String.format("Metal: %s", input.getMetals()));
+                add(String.format("Vegetables: %s", join(", ", input.getVegetables())));
+            }
+        };
     }
 }
