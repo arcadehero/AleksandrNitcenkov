@@ -17,8 +17,6 @@ import org.testng.annotations.Test;
 public class IndexPageTest extends BaseTest {
 
     private static final int EXPECTED_IMAGES_NUMBER = 4;
-    private static final int EXPECTED_TEXTS_NUMBER = 4;
-    private static final int EXPECTED_HEADER_BUTTONS_NUMBER = 4;
 
     @Test(dataProviderClass = DataProviderClass.class, dataProvider = "DataProviderForIndexPageTest")
     @Severity(SeverityLevel.BLOCKER)
@@ -44,7 +42,7 @@ public class IndexPageTest extends BaseTest {
 
         //Assert that there are 4 items on the header section are displayed and they have proper texts
         softAssertions.assertThat(indexPage.getHeaderComponent().getHeaderMenuButtons())
-                      .hasSize(EXPECTED_HEADER_BUTTONS_NUMBER);
+                      .hasSize(expectedMenuButtons.size());
         softAssertions.assertThat(indexPage.getHeaderComponent().isHeaderElementsVisible()).isTrue();
         softAssertions.assertThat(indexPage.getHeaderComponent().getHeaderElementsText())
                       .isEqualTo(expectedMenuButtons);
@@ -56,7 +54,8 @@ public class IndexPageTest extends BaseTest {
 
         //Assert that there are 4 texts on the Index Page under icons and they have proper text
         softAssertions.assertThat(indexPage.getBenefitsComponent().isIndexPageTextsDisplayed()).isTrue();
-        softAssertions.assertThat(indexPage.getBenefitsComponent().getIndexPageTexts()).hasSize(EXPECTED_TEXTS_NUMBER);
+        softAssertions.assertThat(indexPage.getBenefitsComponent().getIndexPageTexts())
+                      .hasSize(expectedIndexPageTexts.size());
         softAssertions.assertThat(indexPage.getBenefitsComponent().getIndexPageTexts())
                       .isEqualTo(expectedIndexPageTexts);
 
