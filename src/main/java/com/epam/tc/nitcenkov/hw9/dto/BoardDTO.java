@@ -8,17 +8,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardDTO {
-
-    protected String name;
-    protected String desc;
-    protected boolean closed;
-    protected String dateClosed;
-    protected String idOrganization;
-    protected boolean pinned;
-    protected String idBoardSource;
-    protected String idMemberCreator;
-    protected String id;
-    protected String url;
+    private String name;
+    private String desc;
+    private boolean closed;
+    private String dateClosed;
+    private String idOrganization;
+    private boolean pinned;
+    private String idBoardSource;
+    private String idMemberCreator;
+    private String id;
+    private String url;
 }
 
 

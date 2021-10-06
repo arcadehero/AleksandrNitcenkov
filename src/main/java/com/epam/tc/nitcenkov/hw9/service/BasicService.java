@@ -1,6 +1,7 @@
 package com.epam.tc.nitcenkov.hw9.service;
 
 import static io.restassured.RestAssured.given;
+import static org.apache.http.HttpStatus.SC_OK;
 
 import com.epam.tc.nitcenkov.hw9.util.Util;
 import io.restassured.RestAssured;
@@ -17,11 +18,23 @@ public class BasicService {
 
     private RequestSpecification requestSpecification;
 
-
     public BasicService() {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         requestSpecification = new RequestSpecBuilder()
             .setBaseUri(Util.BASE_URI)
+            .addQueryParam("key", Util.KEY)
+            .addQueryParam("token", Util.TOKEN)
+            .setContentType(ContentType.JSON)
+            .addFilter(new RequestLoggingFilter())
+            .addFilter(new ResponseLoggingFilter())
+            .build();
+    }
+
+    public BasicService(String idList) {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+        requestSpecification = new RequestSpecBuilder()
+            .setBaseUri(Util.BASE_URI)
+            .addQueryParam("idList", idList)
             .addQueryParam("key", Util.KEY)
             .addQueryParam("token", Util.TOKEN)
             .setContentType(ContentType.JSON)
@@ -37,7 +50,8 @@ public class BasicService {
                 .when()
                 .request(method, Util.BASE_URI + uri)
                 .then()
-                .statusCode(200).extract().response();
+                .statusCode(SC_OK)
+                .extract().response();
     }
 
     public Response requestWithParams(String uri, Method method, Map<String, String> params) {
@@ -48,6 +62,6 @@ public class BasicService {
                 .when()
                 .request(method, Util.BASE_URI + uri)
                 .then()
-                .statusCode(200).extract().response();
+                .statusCode(SC_OK).extract().response();
     }
 }

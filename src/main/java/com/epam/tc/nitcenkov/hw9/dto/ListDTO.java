@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ListDTO {
 
-    protected String id;
-    protected String name;
-    protected String idBoard;
+    private String id;
+    private String name;
+    private String idBoard;
 }
