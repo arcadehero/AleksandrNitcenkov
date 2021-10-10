@@ -1,9 +1,7 @@
 package com.epam.tc.nitcenkov.hw9.service;
 
 import com.epam.tc.nitcenkov.hw9.dto.CardDTO;
-import com.google.gson.GsonBuilder;
 import io.restassured.http.Method;
-import io.restassured.response.Response;
 import java.util.Map;
 
 public class CardService extends BasicService {
@@ -11,25 +9,30 @@ public class CardService extends BasicService {
     private static final String CREATE_CARD = "1/cards";
     private static final String GET_CARD_BY_ID_OR_UPDATE_OR_DELETE = "1/cards/";
 
-    public CardDTO readCardFromResponse(Response response) {
-        return new GsonBuilder().excludeFieldsWithModifiers().create()
-                                .fromJson(response.getBody().asString(),
-                                    CardDTO.class);
+    public CardService(String listId) {
+    }
+
+    public CardService() {
     }
 
     public CardDTO getCardById(String cardId) {
-        return readCardFromResponse(requestWithoutParams(GET_CARD_BY_ID_OR_UPDATE_OR_DELETE + cardId, Method.GET));
+        return (CardDTO) readFromResponse(requestWithoutParams(GET_CARD_BY_ID_OR_UPDATE_OR_DELETE + cardId, Method.GET),
+            CardDTO.class);
     }
 
     public CardDTO createCard(Map<String, String> params) {
-        return readCardFromResponse((requestWithParams(CREATE_CARD, Method.PUT, params)));
+        return (CardDTO) readFromResponse((requestWithParamsForCards(CREATE_CARD, Method.POST, params)), CardDTO.class);
     }
 
     public CardDTO updateCard(String cardId, Map<String, String> params) {
-        return readCardFromResponse(requestWithParams(GET_CARD_BY_ID_OR_UPDATE_OR_DELETE + cardId, Method.GET, params));
+        return (CardDTO) readFromResponse(
+            requestWithParams(GET_CARD_BY_ID_OR_UPDATE_OR_DELETE + cardId, Method.PUT, params),
+            CardDTO.class);
     }
 
     public CardDTO deleteCard(String cardId) {
-        return readCardFromResponse(requestWithoutParams(GET_CARD_BY_ID_OR_UPDATE_OR_DELETE + cardId, Method.DELETE));
+        return (CardDTO) readFromResponse(
+            requestWithoutParams(GET_CARD_BY_ID_OR_UPDATE_OR_DELETE + cardId, Method.DELETE),
+            CardDTO.class);
     }
 }

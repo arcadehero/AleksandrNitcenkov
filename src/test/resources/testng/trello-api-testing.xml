@@ -2,7 +2,7 @@
 <suite name="Rest assured homework">
   <test name="Trello API Tests">
     <classes>
-      <class name="com.epam.tc.nitcenkov.hw9.TrelloApiTests"/>
+      <class name="com.epam.tc.nitcenkov.hw9.tests.TrelloApiTests"/>
     </classes>
   </test>
 </suite>

@@ -10,9 +10,6 @@ public class Util {
     public static String BASE_URI;
     public static String KEY;
     public static String TOKEN;
-    public static String BOARD_NAME;
-    public static String LIST_NAME;
-    public static String CARD_NAME;
 
     static {
         loadProperties();
@@ -25,9 +22,6 @@ public class Util {
             BASE_URI = prop.getProperty("base_uri");
             KEY = prop.getProperty("key");
             TOKEN = prop.getProperty("token");
-            BOARD_NAME = prop.getProperty("boardName");
-            LIST_NAME = prop.getProperty("listName");
-            CARD_NAME = prop.getProperty("cardName");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CardDTO {
     private String id;
-    private String checkItemStates;
     private boolean closed;
     private String idBoard;
     private String idList;
     private String name;
-    private String pos;
-    private String shortLink;
 }
