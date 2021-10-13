@@ -43,7 +43,7 @@ public class BasicService {
             given()
                 .spec(requestSpecification)
                 .when()
-                .request(method, Util.BASE_URI + uri)
+                .request(method, uri)
                 .then()
                 .statusCode(SC_OK)
                 .extract().response();
@@ -55,7 +55,7 @@ public class BasicService {
                 .spec(requestSpecification)
                 .queryParams(params)
                 .when()
-                .request(method, Util.BASE_URI + uri)
+                .request(method, uri)
                 .then()
                 .statusCode(SC_OK).extract().response();
     }
@@ -67,7 +67,7 @@ public class BasicService {
                 .queryParam("idList", Util.ID_LIST)
                 .queryParams(params)
                 .when()
-                .request(method, Util.BASE_URI + uri)
+                .request(method, uri)
                 .then()
                 .statusCode(SC_OK).extract().response();
     }
