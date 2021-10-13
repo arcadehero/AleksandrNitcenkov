@@ -7,7 +7,7 @@ import java.util.Map;
 public class ListService extends BasicService {
 
     private static final String CREATE_LIST = "1/lists";
-    private static final String GET_LIST_BY_ID_OR_UPDATE_OR_DELETE = "1/lists/";
+    private static final String GET_LIST_BY_ID_OR_UPDATE_OR_DELETE = CREATE_LIST + "/";
 
     public ListDTO getListById(String listId) {
         return (ListDTO) readFromResponse(requestWithoutParams(GET_LIST_BY_ID_OR_UPDATE_OR_DELETE + listId, Method.GET),

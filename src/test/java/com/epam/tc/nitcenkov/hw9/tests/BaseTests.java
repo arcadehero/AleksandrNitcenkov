@@ -1,5 +1,10 @@
 package com.epam.tc.nitcenkov.hw9.tests;
 
+import static com.epam.tc.nitcenkov.hw9.tests.TestData.BOARD_NAME;
+import static com.epam.tc.nitcenkov.hw9.tests.TestData.CARD_NAME;
+import static com.epam.tc.nitcenkov.hw9.tests.TestData.LIST_NAME;
+import static com.epam.tc.nitcenkov.hw9.util.Util.ID_BOARD;
+
 import com.epam.tc.nitcenkov.hw9.dto.BoardDTO;
 import com.epam.tc.nitcenkov.hw9.service.BoardService;
 import java.util.HashMap;
@@ -15,13 +20,13 @@ public class BaseTests {
 
     @BeforeMethod
     public void setUp() {
-        paramsForBoardRequests.put("name", TestData.BOARD_NAME);
-        paramsForListRequests.put("name", TestData.LIST_NAME);
-        paramsForCardRequests.put("name", TestData.CARD_NAME);
+        paramsForBoardRequests.put("name", BOARD_NAME);
+        paramsForListRequests.put("name", LIST_NAME);
+        paramsForCardRequests.put("name", CARD_NAME);
 
         BoardDTO board = new BoardService().createBoard(paramsForBoardRequests);
-        System.setProperty("boardId", board.getId());
-        paramsForListRequests.put("idBoard", board.getId());
+        ID_BOARD = board.getId();
+        paramsForListRequests.put("idBoard", ID_BOARD);
     }
 
     @AfterMethod
@@ -29,6 +34,6 @@ public class BaseTests {
         paramsForBoardRequests.clear();
         paramsForListRequests.clear();
         paramsForCardRequests.clear();
-        new BoardService().deleteBoard(System.getProperty("boardId"));
+        new BoardService().deleteBoard(ID_BOARD);
     }
 }

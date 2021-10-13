@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardDTO {
+
     private String name;
     private String desc;
     private boolean closed;
@@ -19,5 +20,3 @@ public class BoardDTO {
     private String id;
     private String url;
 }
-
-

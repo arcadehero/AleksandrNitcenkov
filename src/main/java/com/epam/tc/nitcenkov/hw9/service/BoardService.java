@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class BoardService extends BasicService {
 
-    private static final String GET_OR_UPDATE_OR_DELETE_BOARD = "1/boards/";
     private static final String CREATE = "1/boards";
+    private static final String GET_OR_UPDATE_OR_DELETE_BOARD = CREATE + "/";
 
     public BoardDTO getBoardById(String boardId) {
         return (BoardDTO) readFromResponse(

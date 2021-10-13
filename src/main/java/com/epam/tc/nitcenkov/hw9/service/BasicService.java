@@ -20,8 +20,6 @@ public class BasicService {
 
     private RequestSpecification requestSpecification;
 
-    private RequestSpecification requestSpecificationForCard;
-
     public BasicService() {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         requestSpecification = new RequestSpecBuilder()
@@ -32,17 +30,6 @@ public class BasicService {
             .addFilter(new RequestLoggingFilter())
             .addFilter(new ResponseLoggingFilter())
             .build();
-
-        requestSpecificationForCard = new RequestSpecBuilder()
-            .setBaseUri(Util.BASE_URI)
-            .addQueryParam("idList", System.getProperty("idList"))
-            .addQueryParam("key", Util.KEY)
-            .addQueryParam("token", Util.TOKEN)
-            .setContentType(ContentType.JSON)
-            .addFilter(new RequestLoggingFilter())
-            .addFilter(new ResponseLoggingFilter())
-            .build();
-
     }
 
     public static Object readFromResponse(Response response, Object object) {
@@ -76,7 +63,8 @@ public class BasicService {
     public Response requestWithParamsForCards(String uri, Method method, Map<String, String> params) {
         return
             given()
-                .spec(requestSpecificationForCard)
+                .spec(requestSpecification)
+                .queryParam("idList", Util.ID_LIST)
                 .queryParams(params)
                 .when()
                 .request(method, Util.BASE_URI + uri)

@@ -7,7 +7,7 @@ import java.util.Map;
 public class CardService extends BasicService {
 
     private static final String CREATE_CARD = "1/cards";
-    private static final String GET_CARD_BY_ID_OR_UPDATE_OR_DELETE = "1/cards/";
+    private static final String GET_CARD_BY_ID_OR_UPDATE_OR_DELETE = CREATE_CARD + "/";
 
     public CardService(String listId) {
     }

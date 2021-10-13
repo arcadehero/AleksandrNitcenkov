@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CardDTO {
+
     private String id;
     private boolean closed;
     private String idBoard;
