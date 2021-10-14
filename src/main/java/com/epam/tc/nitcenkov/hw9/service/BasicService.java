@@ -60,11 +60,11 @@ public class BasicService {
                 .statusCode(SC_OK).extract().response();
     }
 
-    public Response requestWithParamsForCards(String uri, Method method, Map<String, String> params) {
+    public Response requestWithParamsForCards(String uri, Method method, Map<String, String> params, String idList) {
         return
             given()
                 .spec(requestSpecification)
-                .queryParam("idList", Util.ID_LIST)
+                .queryParam("idList", idList)
                 .queryParams(params)
                 .when()
                 .request(method, uri)

@@ -10,9 +10,6 @@ public class Util {
     public static String BASE_URI;
     public static String KEY;
     public static String TOKEN;
-    public static String ID_BOARD = "";
-    public static String ID_LIST = "";
-    public static String ID_CARD = "";
 
     static {
         loadProperties();

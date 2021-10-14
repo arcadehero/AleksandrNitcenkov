@@ -20,8 +20,9 @@ public class CardService extends BasicService {
             CardDTO.class);
     }
 
-    public CardDTO createCard(Map<String, String> params) {
-        return (CardDTO) readFromResponse((requestWithParamsForCards(CREATE_CARD, Method.POST, params)), CardDTO.class);
+    public CardDTO createCard(Map<String, String> params, String idList) {
+        return (CardDTO) readFromResponse((requestWithParamsForCards(CREATE_CARD, Method.POST, params, idList)),
+            CardDTO.class);
     }
 
     public CardDTO updateCard(String cardId, Map<String, String> params) {

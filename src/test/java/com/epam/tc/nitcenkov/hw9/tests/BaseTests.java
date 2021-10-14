@@ -2,8 +2,8 @@ package com.epam.tc.nitcenkov.hw9.tests;
 
 import static com.epam.tc.nitcenkov.hw9.tests.TestData.BOARD_NAME;
 import static com.epam.tc.nitcenkov.hw9.tests.TestData.CARD_NAME;
+import static com.epam.tc.nitcenkov.hw9.tests.TestData.ID_BOARD;
 import static com.epam.tc.nitcenkov.hw9.tests.TestData.LIST_NAME;
-import static com.epam.tc.nitcenkov.hw9.util.Util.ID_BOARD;
 
 import com.epam.tc.nitcenkov.hw9.dto.BoardDTO;
 import com.epam.tc.nitcenkov.hw9.service.BoardService;
